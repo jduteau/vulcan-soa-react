@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { soaFHIR } from '../features/soaFHIR/soaFHIR';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    [soaFHIR.reducerPath] : soaFHIR.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([soaFHIR.middleware])
 });
 
 export type AppDispatch = typeof store.dispatch;
